@@ -5,6 +5,7 @@ plugins {
 	id("org.springframework.boot") version "2.5.7"
 	id("io.spring.dependency-management") version "1.1.0"
 	id("org.jetbrains.kotlin.plugin.spring") version "1.5.10"
+	id("org.jetbrains.kotlin.plugin.allopen") version "1.5.10"
 }
 
 group = "com.chacal.spring"
@@ -16,7 +17,7 @@ repositories {
 
 dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-webflux")
-
+	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 	implementation("io.projectreactor.kotlin:reactor-kotlin-extensions")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
@@ -24,14 +25,11 @@ dependencies {
 	implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
 	implementation("org.springframework.boot:spring-boot-starter-test")
 	implementation("io.projectreactor:reactor-test")
+	implementation("com.h2database:h2")
+}
 
-//	implementation 'com.fasterxml.jackson.module:jackson-module-kotlin'
-//	implementation 'io.projectreactor.kotlin:reactor-kotlin-extensions'
-//	implementation 'org.jetbrains.kotlin:kotlin-reflect'
-//	implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk8'
-//	implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-reactor'
-//	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-//	testImplementation 'io.projectreactor:reactor-test'
+allOpen {
+	annotations("javax.persistence.Entity", "javax.persistence.MappedSuperclass", "javax.persistence.Embedabble")
 }
 
 tasks.withType<KotlinCompile> {

@@ -1,19 +1,41 @@
 package com.chacal.spring.trainingspring.persons
 
+import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*
+import org.springframework.web.server.ResponseStatusException
 
 @RestController
 @RequestMapping("/persons")
 class PersonController {
 
+    @Autowired
+    lateinit var personRepository: PersonRepository
+
     @GetMapping("/{id}")
     fun getPerson(@PathVariable id: Int): PersonResponse {
-        return PersonResponse(id, "Pedro", 15)
+        return personRepository
+            .findById(id)
+            .map { it.id?.let { it1 -> PersonResponse(it1, it.name, it.age) } }
+            .orElseThrow { ResponseStatusException(HttpStatus.NOT_FOUND, "Person not found") }
     }
 
     @PostMapping()
     fun addPerson(@RequestBody body: CreatePersonRequest): CreatedPersonResponse {
-        return CreatedPersonResponse(1)
+        return personRepository
+            .save( body.toNewEntity() )
+            .toCreatedResponse()
     }
 
+    fun CreatePersonRequest.toNewEntity(): PersonEntity {
+        return PersonEntity().also {
+            it.name = this.name
+            it.age = this.age
+        }
+    }
+
+    fun PersonEntity.toCreatedResponse(): CreatedPersonResponse {
+        this.id?.let { return CreatedPersonResponse(it) }
+        throw RuntimeException("Person doesn't have an id")
+    }
 }
