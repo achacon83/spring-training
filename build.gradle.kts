@@ -34,10 +34,6 @@ allOpen {
 
 tasks.withType<KotlinCompile> {
 	kotlinOptions.jvmTarget = "11"
-//	kotlinOptions {
-//		freeCompilerArgs = ['-Xjsr305=strict']
-//		jvmTarget = '11'
-//-	}
 }
 
 tasks.test {
