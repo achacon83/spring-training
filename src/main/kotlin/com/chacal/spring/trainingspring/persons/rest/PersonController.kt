@@ -1,5 +1,10 @@
-package com.chacal.spring.trainingspring.persons
+package com.chacal.spring.trainingspring.persons.rest
 
+import com.chacal.spring.trainingspring.persons.data.PersonEntity
+import com.chacal.spring.trainingspring.persons.data.PersonRepository
+import com.chacal.spring.trainingspring.persons.rest.model.PersonResponse
+import com.chacal.spring.trainingspring.persons.rest.model.CreatePersonRequest
+import com.chacal.spring.trainingspring.persons.rest.model.CreatedPersonResponse
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*

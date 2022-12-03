@@ -1,4 +1,4 @@
-package com.chacal.spring.trainingspring.persons
+package com.chacal.spring.trainingspring.persons.data
 
 import javax.persistence.Entity
 import javax.persistence.GeneratedValue
@@ -6,10 +6,10 @@ import javax.persistence.GenerationType
 import javax.persistence.Id
 
 @Entity
-class PersonEntity: Person {
+class PersonEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Int? = null
-    override var name: String = ""
-    override var age: Int = 0
+    var name: String = ""
+    var age: Int = 0
 }
