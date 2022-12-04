@@ -1,7 +1,7 @@
 package com.chacal.spring.trainingspring.persons.rest
 
-import com.chacal.spring.trainingspring.persons.data.PersonEntity
-import com.chacal.spring.trainingspring.persons.data.PersonRepository
+import com.chacal.spring.trainingspring.persons.domain.Person
+import com.chacal.spring.trainingspring.persons.domain.PersonRepository
 import com.chacal.spring.trainingspring.persons.rest.model.PersonResponse
 import com.chacal.spring.trainingspring.persons.rest.model.CreatePersonRequest
 import com.chacal.spring.trainingspring.persons.rest.model.CreatedPersonResponse
@@ -21,25 +21,29 @@ class PersonController {
     fun getPerson(@PathVariable id: Int): PersonResponse {
         return personRepository
             .findById(id)
-            .map { it.id?.let { it1 -> PersonResponse(it1, it.name, it.age) } }
-            .orElseThrow { ResponseStatusException(HttpStatus.NOT_FOUND, "Person not found") }
+            ?.toPersonResponse() ?: throw ResponseStatusException(HttpStatus.NOT_FOUND, "Person not found")
     }
 
     @PostMapping()
     fun addPerson(@RequestBody body: CreatePersonRequest): CreatedPersonResponse {
         return personRepository
-            .save( body.toNewEntity() )
-            .toCreatedResponse()
+            .save( body.toPerson() )
+            .toCreatedPersonResponse()
     }
 
-    fun CreatePersonRequest.toNewEntity(): PersonEntity {
-        return PersonEntity().also {
-            it.name = this.name
-            it.age = this.age
-        }
+    fun CreatePersonRequest.toPerson(): Person {
+        return Person.create(this.name, this.age)
     }
 
-    fun PersonEntity.toCreatedResponse(): CreatedPersonResponse {
+    fun Person.toPersonResponse(): PersonResponse {
+        return PersonResponse(
+            this.id ?: throw RuntimeException("Person doesn't have an id"),
+            this.name,
+            this.age
+        )
+    }
+
+    fun Person.toCreatedPersonResponse(): CreatedPersonResponse {
         this.id?.let { return CreatedPersonResponse(it) }
         throw RuntimeException("Person doesn't have an id")
     }
