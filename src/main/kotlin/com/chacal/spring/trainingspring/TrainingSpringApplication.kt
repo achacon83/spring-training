@@ -2,7 +2,9 @@ package com.chacal.spring.trainingspring
 
 import com.chacal.spring.trainingspring.hexagonal.adapters.data.PersonDataRepository
 import com.chacal.spring.trainingspring.verticalslice.ManualDependencyProvider
+import com.chacal.spring.trainingspring.verticalslice.features.AddPerson
 import com.chacal.spring.trainingspring.verticalslice.features.GetPersonsFeature
+import com.chacal.spring.trainingspring.verticalslice.features.IncreasePersonAge
 import com.trendyol.kediatr.DependencyProvider
 import com.trendyol.kediatr.Mediator
 import com.trendyol.kediatr.MediatorBuilder
@@ -20,7 +22,8 @@ class TrainingSpringApplication {
 	lateinit var personDataRepository: PersonDataRepository
 
 	fun handlers(): HashMap<Class<*>, Any> = hashMapOf(
-		GetPersonsFeature.GetPersonsHandler::class.java to GetPersonsFeature.GetPersonsHandler(personDataRepository)
+		GetPersonsFeature.GetPersonsHandler::class.java to GetPersonsFeature.GetPersonsHandler(personDataRepository),
+		IncreasePersonAge.CommandHandler::class.java to IncreasePersonAge.CommandHandler(personDataRepository)
 	)
 
 	fun provider(): DependencyProvider = ManualDependencyProvider(handlers())
