@@ -1,7 +1,7 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-	kotlin("jvm") version "1.5.10"
+	kotlin("jvm") version "1.7.20"
 	id("org.springframework.boot") version "2.5.7"
 	id("io.spring.dependency-management") version "1.1.0"
 	id("org.jetbrains.kotlin.plugin.spring") version "1.5.10"
@@ -13,6 +13,10 @@ version = "0.0.1-SNAPSHOT"
 
 repositories {
 	mavenCentral()
+
+	maven {
+		url = uri("https://oss.sonatype.org/content/repositories/snapshots")
+	}
 }
 
 dependencies {
@@ -26,6 +30,8 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-starter-test")
 	implementation("io.projectreactor:reactor-test")
 	implementation("com.h2database:h2")
+	implementation("com.trendyol:kediatr-core:2.0.0-SNAPSHOT")
+	//implementation("com.trendyol:kediatr-spring-starter:2.0.0-SNAPSHOT")
 }
 
 allOpen {

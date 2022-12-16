@@ -2,9 +2,9 @@ package com.chacal.spring.trainingspring.verticalslice.features
 
 import com.chacal.spring.trainingspring.hexagonal.adapters.data.PersonData
 import com.chacal.spring.trainingspring.hexagonal.adapters.data.PersonDataRepository
-import com.chacal.spring.trainingspring.verticalslice.core.Mediator
-import com.chacal.spring.trainingspring.verticalslice.core.Request
-import com.chacal.spring.trainingspring.verticalslice.core.RequestHandler
+import com.trendyol.kediatr.Mediator
+import com.trendyol.kediatr.Query
+import com.trendyol.kediatr.QueryHandler
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
@@ -12,11 +12,11 @@ import org.springframework.http.ResponseEntity
 
 class GetPersonsFeature {
     @RestController
-    @RequestMapping("verticalslide/persons")
+    @RequestMapping("/verticalslide/persons")
     class GetPersonsController(val mediator: Mediator) {
         @GetMapping()
-        fun getPersons(): ResponseEntity<GetPersonsViewModel> {
-            val viewModel = mediator(GetPersonsQuery())
+        suspend fun getPersons(): ResponseEntity<GetPersonsViewModel> {
+            val viewModel = mediator.send(GetPersonsQuery())
             return ResponseEntity.ok(viewModel)
         }
     }
@@ -24,12 +24,11 @@ class GetPersonsFeature {
     data class PersonViewModel(val id: Int, val name: String, val age: Int)
     data class GetPersonsViewModel(val persons: List<PersonViewModel>)
 
-    class GetPersonsQuery: Request<GetPersonsViewModel> {
-        // Argumentos del comando, en este caso no tengo ninguno
-    }
+    class GetPersonsQuery: Query<GetPersonsViewModel>
 
-    class GetPersonsHandler(val personDataRepository: PersonDataRepository): RequestHandler<GetPersonsQuery, GetPersonsViewModel> {
-        override operator fun invoke(request: GetPersonsQuery): GetPersonsViewModel {
+    class GetPersonsHandler(val personDataRepository: PersonDataRepository): QueryHandler<GetPersonsQuery, GetPersonsViewModel> {
+
+        override suspend fun handle(query: GetPersonsQuery): GetPersonsViewModel {
             return personDataRepository
                 .findAll()
                 .map { it.toPersonViewModel() }
