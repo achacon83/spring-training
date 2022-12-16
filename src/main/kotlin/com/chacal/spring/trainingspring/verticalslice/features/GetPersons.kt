@@ -2,23 +2,21 @@ package com.chacal.spring.trainingspring.verticalslice.features
 
 import com.chacal.spring.trainingspring.hexagonal.adapters.data.PersonData
 import com.chacal.spring.trainingspring.hexagonal.adapters.data.PersonDataRepository
-import com.chacal.spring.trainingspring.hexagonal.domain.PersonRepository
 import com.chacal.spring.trainingspring.verticalslice.core.Mediator
 import com.chacal.spring.trainingspring.verticalslice.core.Request
 import com.chacal.spring.trainingspring.verticalslice.core.RequestHandler
-import org.springframework.http.ResponseEntity.ok
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 import org.springframework.http.ResponseEntity
 
-class GetPersons {
+class GetPersonsFeature {
     @RestController
-    @RequestMapping("/persons")
+    @RequestMapping("verticalslide/persons")
     class GetPersonsController(val mediator: Mediator) {
         @GetMapping()
         fun getPersons(): ResponseEntity<GetPersonsViewModel> {
-            val viewModel = mediator.send(GetPersonsQuery())
+            val viewModel = mediator(GetPersonsQuery())
             return ResponseEntity.ok(viewModel)
         }
     }

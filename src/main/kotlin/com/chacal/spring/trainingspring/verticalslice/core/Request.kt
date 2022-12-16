@@ -1,5 +1,5 @@
 package com.chacal.spring.trainingspring.verticalslice.core
 
-interface Request<TResponse> {
+interface Request<out TResponse> {
 
 }
