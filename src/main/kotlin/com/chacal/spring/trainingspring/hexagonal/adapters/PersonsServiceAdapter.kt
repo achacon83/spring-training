@@ -1,9 +1,9 @@
-package com.chacal.spring.trainingspring.persons.adapters
+package com.chacal.spring.trainingspring.hexagonal.adapters
 
-import com.chacal.spring.trainingspring.persons.adapters.data.PersonData
-import com.chacal.spring.trainingspring.persons.adapters.data.PersonDataRepository
-import com.chacal.spring.trainingspring.persons.domain.Person
-import com.chacal.spring.trainingspring.persons.domain.PersonRepository
+import com.chacal.spring.trainingspring.hexagonal.adapters.data.PersonData
+import com.chacal.spring.trainingspring.hexagonal.adapters.data.PersonDataRepository
+import com.chacal.spring.trainingspring.hexagonal.domain.Person
+import com.chacal.spring.trainingspring.hexagonal.domain.PersonRepository
 import org.springframework.stereotype.Service
 
 @Service

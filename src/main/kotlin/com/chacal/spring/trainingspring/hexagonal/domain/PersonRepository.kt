@@ -1,4 +1,4 @@
-package com.chacal.spring.trainingspring.persons.domain
+package com.chacal.spring.trainingspring.hexagonal.domain
 
 interface PersonRepository {
     fun save(person: Person): Person

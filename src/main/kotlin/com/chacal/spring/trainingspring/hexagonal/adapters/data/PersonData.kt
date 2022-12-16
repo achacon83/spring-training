@@ -1,4 +1,4 @@
-package com.chacal.spring.trainingspring.persons.adapters.data
+package com.chacal.spring.trainingspring.hexagonal.adapters.data
 
 import javax.persistence.Entity
 import javax.persistence.GeneratedValue

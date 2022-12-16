@@ -1,10 +1,10 @@
-package com.chacal.spring.trainingspring.persons.rest
+package com.chacal.spring.trainingspring.hexagonal.rest
 
-import com.chacal.spring.trainingspring.persons.domain.Person
-import com.chacal.spring.trainingspring.persons.domain.PersonRepository
-import com.chacal.spring.trainingspring.persons.rest.model.PersonResponse
-import com.chacal.spring.trainingspring.persons.rest.model.CreatePersonRequest
-import com.chacal.spring.trainingspring.persons.rest.model.CreatedPersonResponse
+import com.chacal.spring.trainingspring.hexagonal.domain.Person
+import com.chacal.spring.trainingspring.hexagonal.domain.PersonRepository
+import com.chacal.spring.trainingspring.hexagonal.rest.model.PersonResponse
+import com.chacal.spring.trainingspring.hexagonal.rest.model.CreatePersonRequest
+import com.chacal.spring.trainingspring.hexagonal.rest.model.CreatedPersonResponse
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*

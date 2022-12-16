@@ -1,4 +1,4 @@
-package com.chacal.spring.trainingspring.persons.adapters.data
+package com.chacal.spring.trainingspring.hexagonal.adapters.data
 
 import org.springframework.data.repository.CrudRepository
 import org.springframework.stereotype.Repository
