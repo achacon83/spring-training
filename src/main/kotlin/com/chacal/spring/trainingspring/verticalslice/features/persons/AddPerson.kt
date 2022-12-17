@@ -1,4 +1,4 @@
-package com.chacal.spring.trainingspring.verticalslice.features
+package com.chacal.spring.trainingspring.verticalslice.features.persons
 
 import com.chacal.spring.trainingspring.hexagonal.adapters.data.PersonData
 import com.chacal.spring.trainingspring.hexagonal.adapters.data.PersonDataRepository
@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*
 
 class AddPerson {
     @RestController
-    @RequestMapping("/verticalslide/persons")
+    @RequestMapping("/\${person-controller.path}")
     class Controller(private val personDataRepository: PersonDataRepository) {
         @PostMapping()
         suspend fun addPerson(@RequestBody body: Body): ResponseEntity<Int> {

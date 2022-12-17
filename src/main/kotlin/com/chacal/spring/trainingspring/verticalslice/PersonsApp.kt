@@ -1,7 +1,6 @@
 package com.chacal.spring.trainingspring.verticalslice
 
 import com.chacal.spring.trainingspring.hexagonal.adapters.data.PersonDataRepository
-import com.chacal.spring.trainingspring.verticalslice.features.GetPersonsFeature
 import org.springframework.stereotype.Service
 
 @Service

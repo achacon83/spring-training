@@ -1,4 +1,4 @@
-package com.chacal.spring.trainingspring.verticalslice.features
+package com.chacal.spring.trainingspring.verticalslice.features.persons
 
 import com.chacal.spring.trainingspring.hexagonal.adapters.data.PersonDataRepository
 import com.trendyol.kediatr.Mediator
@@ -10,11 +10,11 @@ import org.springframework.web.bind.annotation.RestController
 
 class IncreasePersonAge {
     @RestController
-    @RequestMapping("/verticalslide/persons")
+    @RequestMapping("/\${person-controller.path}")
     class Controller(val mediator: Mediator) {
         @PostMapping("/{id}/increaseAge")
         suspend fun addPerson(@PathVariable id: Int): ResponseEntity<Void> {
-            val id = mediator.send(IncreasePersonAge.Command(id))
+            val id = mediator.send(Command(id))
             return ResponseEntity.ok().build()
         }
     }
