@@ -12,7 +12,7 @@ import org.springframework.http.ResponseEntity
 
 class GetPersons {
     @RestController
-    @RequestMapping("/\${person-controller.path}")
+    @RequestMapping("/\${persons.controller.path}")
     class GetPersonsController(val mediator: Mediator) {
         @GetMapping()
         suspend fun getPersons(): ResponseEntity<GetPersonsViewModel> {

@@ -7,10 +7,10 @@ import org.springframework.web.bind.annotation.*
 
 class AddPerson {
     @RestController
-    @RequestMapping("/\${person-controller.path}")
+    @RequestMapping("/\${persons.controller.path}")
     class Controller(private val personDataRepository: PersonDataRepository) {
         @PostMapping()
-        suspend fun addPerson(@RequestBody body: Body): ResponseEntity<Int> {
+        fun addPerson(@RequestBody body: Body): ResponseEntity<Int> {
             val id = personDataRepository.save(body.toData()).id!!
             return ResponseEntity.ok(id)
         }

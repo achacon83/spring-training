@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController
 
 class IncreasePersonAge {
     @RestController
-    @RequestMapping("/\${person-controller.path}")
+    @RequestMapping("/\${persons.controller.path}")
     class Controller(val mediator: Mediator) {
         @PostMapping("/{id}/increaseAge")
         suspend fun addPerson(@PathVariable id: Int): ResponseEntity<Void> {
